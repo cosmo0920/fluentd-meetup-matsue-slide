@@ -60,7 +60,7 @@
 \end{frame}
 
 \section[]{Fluentd v0.14の新機能のおさらい}
-\begin{frame}{Fluentd v0.14の新機能のおさらい}
+\begin{frame}{Fluentd v0.14の新機能\footnote[frame]{http://www.fluentd.org/blog/fluentd-v0.14.0-has-been-released}のおさらい}
   \Large{
     \begin{itemize}
     \item \only<1>{Windowsサポート}\only<2->{\alert{Windowsサポート}}
@@ -141,17 +141,18 @@ end
   \begin{block}{C拡張を含むgemの注意点}
     \begin{itemize}
     \item gemのユーザーは依存しているライブラリをシステムにインストールする必要があります
-      \begin{itemize}
-      \item \only<1>{実はdllやdylibだけでもRubyのC拡張から機能が呼べることができれば使う分には大丈夫です。}
-        \only<2>{\alert{実はdllやdylibだけでもRubyのC拡張から機能が呼べることができれば使う分には大丈夫です。}}
-      \end{itemize}
+      \uncover<2> {
+        \begin{itemize}
+        \item \alert{実はdllやdylib、soだけでもRubyのC拡張から機能が呼べることができれば使う分には大丈夫です。}
+        \end{itemize}
+      }
     \item gemのユーザーはCのソースをビルドするための開発環境をシステムにインストールする必要があります
     \end{itemize}
   \end{block}
 \end{frame}
 
 \section[]{WindowsでのRubyのエコシステム}
-\begin{frame}{WindowsでのRubyのエコシステム}
+\begin{frame}{WindowsでのRubyのエコシステム\small{–fat gemとは}}
   \begin{block}{fat gemとは}
     \begin{itemize}
     \item {\bf fat gem} というgemの中にRubyのC拡張のバイナリをパッケージングできるしくみがあります。
@@ -254,11 +255,13 @@ someone who has the skill, time and desire to keep it going.\footnote[frame]{htt
     \small{\uncover<2->{windows-api, windows-prプロジェクトのmasterも合わせて引き継ぎました。}}
   }
 \end{frame}
+
 \begin{frame}{win32-apiのRuby 2.3サポート}
-  Ruby 2.3に対応させる\footnote[frame]{https://github.com/cosmo0920/win32-api/pull/18}作業と、AppVeyorの導入\footnote[frame]{https://github.com/cosmo0920/win32-api/pull/20}の作業を行いました。
-  \includegraphics[clip,width=4cm]{images/support_ruby23_win32-api}
-  \includegraphics[clip,width=7cm]{images/support_appveyor_win32-api}
+  Ruby 2.3に対応させる\footnote[frame]{https://github.com/cosmo0920/win32-api/pull/18}作業と、AppVeyor\footnote[frame]{https://www.appveyor.com/}\includegraphics[clip,width=0.5cm]{images/appveyor_logo.png}の導入\footnote[frame]{https://github.com/cosmo0920/win32-api/pull/20}の作業を行いました。
+  \includegraphics[clip,width=4cm]{images/support_ruby23_win32-api.png}
+  \includegraphics[clip,width=7cm]{images/support_appveyor_win32-api.png}
 \end{frame}
+
 \begin{frame}{win32-apiのRuby 2.3サポート}
   \Large {
    \center {1.6.0としてRuby 2.3のサポートと、Ruby 1.8.7と1.9.0のサポートを切ったバージョン1.6.0をリリース済みです。\footnote[frame]{https://rubygems.org/gems/win32-api/versions/1.6.0-universal-mingw32}}
