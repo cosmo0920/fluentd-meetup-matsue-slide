@@ -191,10 +191,32 @@ end
 \begin{frame}{win32-api gem}
   \begin{block}{win32-apiとは}
     元はdjberg96氏\footnote[frame]{https://github.com/djberg96}作。\newline
-    Win32APIをRubyから呼び出せるラッパー。\newline
-    Ruby本体のAPIにはないコールバックサポートがあります。
+    Win32APIをRubyから呼び出せるようにするgemです。\newline
+    Ruby本体のAPIにはないコールバックサポートがあります。\newline
     {\bf $\#include <windows.h>$ }\# WIN32APIのおまじない
   \end{block}
+\end{frame}
+
+% Set font size for lstlisting.
+\newcommand\XSmall{\fontsize{8.5}{9}\selectfont}
+\begin{frame}[fragile]{win32-api gemのコード例}
+\begin{lstlisting}[language=Ruby,basicstyle=\ttfamily\XSmall]
+require 'win32/api'
+include Win32
+
+EnumWindows = API.new('EnumWindows', 'KP', 'L', 'user32')
+GetWindowText = API.new('GetWindowText', 'LPI', 'I', 'user32')
+
+EnumWindowsProc = API::Callback.new('LP', 'I'){|handle, param|
+   buf = "\0" * 200
+   GetWindowText.call(handle, buf, 200);
+   puts buf.strip unless buf.strip.empty?
+   buf.index(param).nil? ? true : false
+}
+
+EnumWindows.call(EnumWindowsProc, 'UEDIT32')
+\end{lstlisting}
+win32-apiのコメントから抜粋\footnote[frame]{https://github.com/djberg96/win32-api/blob/master/ext/win32/api.c\#L157-L171}。
 \end{frame}
 
 \begin{frame}{win32-apiのRuby 2.3サポート}
